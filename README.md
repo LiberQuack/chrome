@@ -25,10 +25,19 @@ cd testcafe/examples/basic
 testcafe --ports 9505,9506 remote:1 test.js |&
 tee /dev/stderr |
 grep -o --line-buffered http.* |
-xargs -n 1 -I % echo % > /tmp/testcafe.url &
-
-sleep 1 && 
-docker run -it --rm \
+xargs -n 1 -I % \
+    docker run --rm \
     -v "`pwd`/record:/session" \
-     martinsthiago/chrome:58.0.3029.96 google-chrome `cat /tmp/testcafe.url` >& /dev/null
+    martinsthiago/chrome:58.0.3029.96 google-chrome % >& /dev/null &     
+```
+
+## Docker Automated Build
+
+This snippet show how this chrome image is set updated
+
+```bash
+
+git clone https://github.com/MartinsThiago/chrome.git &&
+cd chrome && chmod +x ./chrome-auto-push-installer.sh &&
+./chrome-auto-push-installer.sh
 ```
