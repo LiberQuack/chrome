@@ -22,14 +22,12 @@ Advanced example (Automatically Start Chrome Container)
 git clone https://github.com/DevExpress/testcafe.git
 cd testcafe/examples/basic
 
-testcafe --ports 9505,9506 remote:1 test.js >& /tmp/testcafe &
-TESTCAFE_PID=$! && tail -f /tmp/testcafe | grep -o --line-buffered http.* |
-xargs -n 1 -I % \
-    docker run --rm \
+tail -F /tmp/testcafe | grep -o --line-buffered http.* |
+xargs -n 1 -I % docker run --rm \
+    --name potato \
     -v "`pwd`/record:/session" \
     martinsthiago/chrome:58.0.3029.96 google-chrome % >& /dev/null &
-    
-wait $TESTCAFE_PID; echo hey
+{ testcafe --ports 9505,9506 remote:1 test.js >& /tmp/testcafe; kill $(jobs -p); docker kill potato; rm /tmp/testcafe; }
 ```
 
 ## Docker Automated Build
