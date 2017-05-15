@@ -27,7 +27,8 @@ xargs -n 1 -I % docker run --rm \
     --name potato \
     -v "`pwd`/record:/session" \
     martinsthiago/chrome:58.0.3029.96 google-chrome % >& /dev/null &
-{ testcafe --ports 9505,9506 remote:1 test.js >& /tmp/testcafe; kill $(jobs -p); docker kill potato; rm /tmp/testcafe; }
+testcafe --ports 9505,9506 remote:1 test.js |& tee /tmp/testcafe /tmp/stdout; kill $(jobs -p); sleep 10 && docker kill potato; rm /tmp/testcafe
+sudo chown -R $USER ./record
 ```
 
 ## Docker Automated Build
