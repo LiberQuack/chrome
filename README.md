@@ -31,9 +31,9 @@ testcafe --ports 9505,9506 remote:1 test.js |& tee /tmp/testcafe /tmp/stdout; ki
 sudo chown -R $USER ./record
 ```
 
-## Docker Automated Build
+## Release Chrome Images Automatically
 
-This snippet show how this chrome image is set updated
+Setup your server to watch chrome-releases with this script
 
 ```bash
 git clone https://github.com/MartinsThiago/chrome.git &&
