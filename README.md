@@ -13,7 +13,13 @@ Let's try an example (Container Manual Start)
 ```bash
 git clone https://github.com/DevExpress/testcafe.git
 cd testcafe/examples/basic
-testcafe remote test.js
+testcafe remote test.js #TESTCAFE_URL
+
+#Manually spawn a container
+docker run -it -p 5900:5900 \
+    -v $(pwd):/data \
+    martinsthiago/chrome \
+    google-chrome [TESTCAFE_URL]
 ```
 
 Advanced example (Automatically Start Chrome Container)
