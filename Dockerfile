@@ -9,7 +9,7 @@ RUN apt update && \
     apt install -y google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
 
-ENV BROWSER=chrome-$(google-chrome --version | awk '{print $3}')
+RUN echo "BROWSER=chrome-$(google-chrome --version | awk '{print $3}')" >> /etc/environment
 
 ADD chrome-launcher.sh /opt/google/chrome/google-chrome
 RUN chmod +x /opt/google/chrome/google-chrome
