@@ -7,6 +7,6 @@ sudo apt update &&
 sudo apt install -y google-chrome-stable curl
 
 # Register crontab
-sudo cp ./chrome-verify-updates-job.sh /etc/cron.daily/ &&
-chmod +x /etc/cron.daily/chrome-verify-updates-job.sh &&
-/etc/cron.daily/chrome-verify-updates-job.sh
+sudo cp ./chrome-verify-updates-job.sh /etc/cron.daily/chrome-verify-updates-job &&
+chmod +x /etc/cron.daily/chrome-verify-updates-job &&
+/etc/cron.daily/chrome-verify-updates-job
